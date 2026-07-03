@@ -4,5 +4,5 @@
 3) Активируйте виртуальное окружение командой venv\Scripts\activate
 4) Установите необходимые библиотеки командой pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 5) После чего установите остальные зависимости из файла requirements.txt командой pip install -r requirements.txt
-6) Запустите приложени python app.py
+6) Запустите приложение выполнив команду python app.py
 7) Веб интерфейс будет доступен по адресу http://127.0.0.1:5000
