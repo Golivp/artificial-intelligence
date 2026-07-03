@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подсчёт гостей за столом — YOLOv8</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container my-4">
+        <h1 class="text-center mb-4"><i class="bi bi-people-fill"></i> Подсчёт гостей за столом</h1>
+
+        <div class="row">
+            <!-- Левая колонка: загрузка и настройки -->
+            <div class="col-lg-5">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <i class="bi bi-upload"></i> Загрузить файл
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <input type="file" id="fileInput" class="form-control" accept="image/*,video/*">
+                        </div>
+                        <div id="filePreview" class="text-center mb-3">
+                            <i class="bi bi-file-earmark-image" style="font-size: 4rem; color: #ccc;"></i>
+                            <p class="text-muted">Файл не выбран</p>
+                        </div>
+                        <button id="analyzeBtn" class="btn btn-success w-100" disabled>
+                            <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+                            Анализировать файл
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-header bg-secondary text-white">
+                        <i class="bi bi-sliders2"></i> Настройки
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="modelSelect" class="form-label">Модель YOLOv8</label>
+                            <select id="modelSelect" class="form-select"></select>
+                            <small id="modelDesc" class="text-muted"></small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confidenceSlider" class="form-label">Уверенность (Confidence): <span id="confidenceVal">0.5</span></label>
+                            <input type="range" class="form-range" id="confidenceSlider" min="0.1" max="0.9" step="0.05" value="0.5">
+                        </div>
+                        <div class="mb-3">
+                            <label for="iouSlider" class="form-label">IOU: <span id="iouVal">0.45</span></label>
+                            <input type="range" class="form-range" id="iouSlider" min="0.1" max="0.9" step="0.05" value="0.45">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Правая колонка: результаты и история -->
+            <div class="col-lg-7">
+                <div id="resultContainer" class="card shadow-sm mb-4 d-none">
+                    <div class="card-header bg-success text-white">
+                        <i class="bi bi-check-circle"></i> Результат анализа
+                    </div>
+                    <div class="card-body" id="resultBody">
+                        <!-- Динамически заполняется -->
+                    </div>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                        <span><i class="bi bi-clock-history"></i> История анализов</span>
+                        <button id="refreshHistoryBtn" class="btn btn-sm btn-light"><i class="bi bi-arrow-repeat"></i></button>
+                    </div>
+                    <div class="card-body" id="historyBody" style="max-height: 400px; overflow-y: auto;">
+                        <p class="text-muted text-center">История пуста</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
